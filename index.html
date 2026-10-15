@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Lucky Draw Eksklusif</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+        body {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #ff9966 100%);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .container {
+            background: linear-gradient(135deg, #fffcf4 0%, #fff3d1 100%);
+            border: 3px solid #f1c40f;
+            background-image: radial-gradient(#e67e22 0.75px, transparent 0.75px), radial-gradient(#f1c40f 0.75px, #fffcf4 0.75px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            
+            width: 100%;
+            max-width: 480px;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+        h1 {
+            font-size: 24px;
+            color: #d35400;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+            font-weight: 800;
+        }
+        h2 {
+            font-size: 20px;
+            color: #b7950b;
+            margin-bottom: 15px;
+            text-align: left;
+            border-bottom: 2px solid #f9e79f;
+            padding-bottom: 8px;
+            font-weight: 700;
+            text-shadow: 1px 1px 1px rgba(255,255,255,0.8);
+        }
+        .section-box {
+            background: rgba(255, 255, 255, 0.9);
+            border: 3px dashed #e67e22;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+            text-align: center;
+            box-shadow: 0 8px 15px rgba(230,126,34,0.15);
+        }
+        .section-box img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        .price {
+            font-size: 26px;
+            font-weight: bold;
+            color: #c0392b;
+            margin-top: 5px;
+            text-shadow: 1px 1px 0px rgba(255,255,255,0.8);
+        }
+        .card-block {
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid #f39c12;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 6px 15px rgba(243, 156, 18, 0.15);
+            text-align: left;
+        }
+        .btn {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+        }
+        .btn:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        .btn-wa {
+            background: linear-gradient(135deg, #25d366, #1ebe5d);
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            margin-top: 5px;
+        }
+        .btn-wa:hover {
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+        }
+        
+        /* Wheel Styling */
+        .wheel-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 0 auto 20px auto;
+        }
+        canvas {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+            background: #fff;
+            border: 4px solid #f1c40f;
+        }
+        .pointer {
+            position: absolute;
+            top: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 14px solid transparent;
+            border-right: 14px solid transparent;
+            border-top: 28px solid #c0392b;
+            z-index: 20;
+            filter: drop-shadow(0 3px 3px rgba(0,0,0,0.3));
+        }
+        .admin-box {
+            background: #fef9e7;
+            border: 1px solid #f9e79f;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+        .form-group {
+            margin-bottom: 10px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #7d6608;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #f39c12;
+            border-radius: 8px;
+            font-size: 14px;
+            background: #fff;
+        }
+        #result-message {
+            font-size: 16px;
+            font-weight: bold;
+            color: #7d6608;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        #claim-section {
+            display: none;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        /* Animasi Meriah & Hujan Uang */
+        .celebration-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+            display: none;
+            overflow: hidden;
+        }
+        .celebration-overlay.active {
+            display: block;
+        }
+        .money-drop {
+            position: absolute;
+            top: -50px;
+            font-size: 28px;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            0% {
+                transform: translateY(-50px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(105vh) rotate(360deg);
+                opacity: 0.2;
+            }
+        }
+        .popup-win {
+            animation: bounceIn 0.8s ease;
+        }
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); opacity: 1; }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Overlay Animasi Hujan Uang -->
+    <div id="celebration" class="celebration-overlay"></div>
+
+    <div class="container">
+        <h1>SELAMAT DATANG DI EVENT LUCKY DRAW BEA & CUKAI</h1>
+        
+        <!-- BAGIAN 1: INFO TIKET & PEMBELIAN -->
+        <div class="section-box">
+            <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=600&q=80" alt="Kupon Lucky Draw">
+            <p style="font-weight: bold; color: #7d6608;">💵 Tiket Kupon Resmi Event 💵</p>
+            <div class="price">Rp 750.000</div>
+        </div>
+        <button class="btn btn-wa" onclick="buyTicketToWhatsApp()">💳 Beli Kupon Sekarang (KLIK DISINI)</button>
+
+        <br><hr style="border: 0; border-top: 2px dashed #f39c12; margin: 25px 0;"><br>
+
+        <!-- BAGIAN 2: SPIN LUCKY DRAW DENGAN KODE ADMIN -->
+        <div class="card-block">
+            <h2>✨ Spin Lucky Draw ✨</h2>
+            
+            <div class="admin-box">
+                <div class="form-group">
+                    <label>🔑 Masukkan Kode Unik dari Admin:</label>
+                    <div style="display: flex; gap: 8px; margin-top: 5px;">
+                        <input type="text" id="admin-code" placeholder="">
+                        <button class="btn" style="width: 100px; padding: 8px;" onclick="verifyCode()">Aktivasi</button>
+                    </div>
+                </div>
+                <button class="btn btn-wa" style="font-size: 14px; padding: 10px;" onclick="requestAdminCode()">💬 Minta Kode ke WhatsApp Admin</button>
+            </div>
+
+            <div class="wheel-container">
+                <div class="pointer"></div>
+                <canvas id="wheel" width="400" height="400"></canvas>
+            </div>
+            
+            <button class="btn" id="spin-btn" onclick="startSpin()" disabled>🎯 Putar Roda Sekarang!</button>
+            <div id="result-message"></div>
+            
+            <!-- Tombol Klaim Hadiah ke WA -->
+            <div id="claim-section">
+                <button class="btn btn-wa" onclick="claimPrizeToWhatsApp()">🎁 Kirim Klaim Hadiah ke WA Admin</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let wonPrize = "";
+
+        function buyTicketToWhatsApp() {
+            const message = "Halo Admin, saya ingin membeli tiket kupon Lucky Draw seharga Rp 750.000. Mohon informasi pembayarannya.";
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappNumber = "6282379510356"; // Ganti nomor WhatsApp tujuan Anda
+            window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
+        }
+
+        function requestAdminCode() {
+            const message = "Halo Admin, saya ingin meminta kode unik untuk memutar Roda Lucky Draw.";
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappNumber = "6282379510356"; // Ganti nomor WhatsApp tujuan Anda
+            window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
+        }
+
+        function claimPrizeToWhatsApp() {
+            const message = `Halo Admin, saya telah menyelesaikan spin Lucky Draw dan berhasil memenangkan hadiah *${wonPrize.toUpperCase()}*. Mohon panduan untuk proses penukaran/klaim hadiahnya. Terima kasih! 🎉`;
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappNumber = "6282379510356"; // Ganti nomor WhatsApp tujuan Anda
+            window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
+        }
+
+        let targetIndex = 0;
+
+        function verifyCode() {
+            const codeInput = document.getElementById('admin-code').value.trim().toUpperCase();
+
+            if(codeInput === "ADMIN01") {
+                targetIndex = 4; // Emas Antam 35 Gram
+                alert("Kode ADMIN01 Berhasil! Anda akan mendapatkan hadiah EMAS ANTAM 35 GRAM. Tombol putar aktif.");
+                document.getElementById('spin-btn').disabled = false;
+                document.getElementById('admin-code').disabled = true;
+            } else if(codeInput === "ADMIN98") {
+                targetIndex = 3; // Uang Tunai Rp 50.000.000
+                alert("Kode ADMIN98 Berhasil! Anda akan mendapatkan hadiah UANG TUNAI RP 50.000.000. Tombol putar aktif.");
+                document.getElementById('spin-btn').disabled = false;
+                document.getElementById('admin-code').disabled = true;
+            } else {
+                alert("Kode tidak valid!, Silahkan chat admin terlebih dahulu.");
+            }
+        }
+
+        const canvas = document.getElementById("wheel");
+        const ctx = canvas.getContext("2d");
+
+        // Daftar Hadiah dengan latar belakang warna biru dan teks hitam-putih
+        const sectors = [
+            { line1: "MOTOR", line2: "ADV150", bgColor: "#2980b9" },
+            { line1: "EMAS ANTAM", line2: "27 GRAM", bgColor: "#3498db" },
+            { line1: "MOBIL FORTUNER", line2: "TAHUN 2026", bgColor: "#1f618d" },
+            { line1: "UANG TUNAI", line2: "RP 50.000.000", bgColor: "#2471a3" }, // Index 3 (ADMIN98)
+            { line1: "EMAS ANTAM", line2: "35 GRAM", bgColor: "#2e86c1" }  // Index 4 (ADMIN01)
+        ];
+
+        const arc = (2 * Math.PI) / sectors.length;
+        let startAngle = 0;
+
+        window.onload = function() {
+            drawWheel();
+        };
+
+        function drawSector(sector, i) {
+            const angle = startAngle + i * arc;
+            ctx.save();
+            
+            // Menggambar latar belakang sektor dengan warna biru
+            ctx.beginPath();
+            ctx.moveTo(200, 200);
+            ctx.arc(200, 200, 200, angle, angle + arc, false);
+            ctx.lineTo(200, 200);
+            ctx.closePath();
+            ctx.fillStyle = sector.bgColor;
+            ctx.fill();
+
+            // Garis pembatas antar sektor berwarna putih
+            ctx.beginPath();
+            ctx.moveTo(200, 200);
+            ctx.arc(200, 200, 200, angle, angle + arc, false);
+            ctx.lineTo(200, 200);
+            ctx.strokeStyle = "#ffffff";
+            ctx.lineWidth = 3;
+            ctx.stroke();
+            ctx.restore();
+
+            // Mengatur teks 2 baris dengan perpaduan warna hitam dan putih
+            ctx.save();
+            ctx.translate(200, 200);
+            const midAngle = angle + arc / 2;
+            ctx.rotate(midAngle);
+            
+            ctx.font = "bold 14px sans-serif";
+            ctx.lineWidth = 4;
+            ctx.strokeStyle = "#000000"; 
+            ctx.fillStyle = "#ffffff";    
+
+            const isUpsideDown = midAngle > Math.PI / 2 && midAngle < 3 * Math.PI / 2;
+            if (isUpsideDown) {
+                ctx.rotate(Math.PI);
+                ctx.textAlign = "left";
+                ctx.strokeText(sector.line1, -165, -3);
+                ctx.fillText(sector.line1, -165, -3);
+                ctx.strokeText(sector.line2, -165, 14);
+                ctx.fillText(sector.line2, -165, 14);
+            } else {
+                ctx.textAlign = "right";
+                ctx.strokeText(sector.line1, 165, -3);
+                ctx.fillText(sector.line1, 165, -3);
+                ctx.strokeText(sector.line2, 165, 14);
+                ctx.fillText(sector.line2, 165, 14);
+            }
+
+            ctx.restore();
+        }
+
+        function drawWheel() {
+            ctx.clearRect(0, 0, 400, 400);
+            for (let i = 0; i < sectors.length; i++) {
+                drawSector(sectors[i], i);
+            }
+        }
+
+        function startSpin() {
+            document.getElementById('spin-btn').disabled = true;
+            document.getElementById('result-message').innerText = "Memutar...";
+            
+            wonPrize = sectors[targetIndex].line1 + " " + sectors[targetIndex].line2;
+
+            let spins = 4; 
+            let randomExtra = (Math.PI * 2) * spins;
+            let targetAngle = (1.5 * Math.PI) - (targetIndex * arc + arc / 2);
+            let finalAngle = randomExtra + targetAngle;
+
+            let currentAngle = 0;
+            let duration = 3000; 
+            let startTime = null;
+
+            function animateSpin(timestamp) {
+                if (!startTime) startTime = timestamp;
+                let progress = timestamp - startTime;
+                let percent = Math.min(progress / duration, 1);
+                
+                let easing = 1 - Math.pow(1 - percent, 3);
+                currentAngle = easing * finalAngle;
+
+                startAngle = currentAngle;
+                drawWheel();
+
+                if (percent < 1) {
+                    requestAnimationFrame(animateSpin);
+                } else {
+                    document.getElementById('result-message').innerHTML = `<div class="popup-win">🎉 SELAMAT! ANDA BERHASIL MENDAPATKAN: <br><span style="color: #c0392b; font-size: 20px;">${wonPrize.toUpperCase()} UTAMA!</span> 🥳</div>`;
+                    document.getElementById('claim-section').style.display = 'block';
+                    triggerCelebration();
+                }
+            }
+
+            requestAnimationFrame(animateSpin);
+        }
+
+        function triggerCelebration() {
+            const celebrationContainer = document.getElementById('celebration');
+            celebrationContainer.classList.add('active');
+            
+            const symbols = ['💵', '💶', '💷', '💴', '🧧', '✨', '🎉'];
+            
+            for (let i = 0; i < 50; i++) {
+                const money = document.createElement('div');
+                money.classList.add('money-drop');
+                money.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+                money.style.left = Math.random() * 100 + 'vw';
+                money.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                money.style.animationDelay = (Math.random() * 2) + 's';
+                celebrationContainer.appendChild(money);
+            }
+        }
+    </script>
+</body>
+</html>
