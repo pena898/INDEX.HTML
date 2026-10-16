@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Event Lucky Draw Eksklusif</title>
+    <title>Lucky Draw Eksklusif</title>
     <style>
         * {
             box-sizing: border-box;
@@ -35,7 +35,6 @@
             background-image: radial-gradient(#e67e22 0.75px, transparent 0.75px), radial-gradient(#f1c40f 0.75px, #fffcf4 0.75px);
             background-size: 30px 30px;
             background-position: 0 0, 15px 15px;
-            
             width: 100%;
             max-width: 480px;
             padding: 30px;
@@ -46,51 +45,18 @@
             z-index: 10;
         }
         h1 {
-            font-size: 24px;
+            font-size: 22px;
             color: #d35400;
             margin-bottom: 20px;
             text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
             font-weight: 800;
-        }
-        h2 {
-            font-size: 20px;
-            color: #b7950b;
-            margin-bottom: 15px;
-            text-align: left;
-            border-bottom: 2px solid #f9e79f;
-            padding-bottom: 8px;
-            font-weight: 700;
-            text-shadow: 1px 1px 1px rgba(255,255,255,0.8);
-        }
-        .section-box {
-            background: rgba(255, 255, 255, 0.9);
-            border: 3px dashed #e67e22;
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 25px;
-            text-align: center;
-            box-shadow: 0 8px 15px rgba(230,126,34,0.15);
-        }
-        .section-box img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            border-radius: 10px;
-            margin-bottom: 15px;
-        }
-        .price {
-            font-size: 26px;
-            font-weight: bold;
-            color: #c0392b;
-            margin-top: 5px;
-            text-shadow: 1px 1px 0px rgba(255,255,255,0.8);
         }
         .card-block {
             background: rgba(255, 255, 255, 0.95);
             border: 2px solid #f39c12;
             border-radius: 15px;
             padding: 20px;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             box-shadow: 0 6px 15px rgba(243, 156, 18, 0.15);
             text-align: left;
         }
@@ -123,7 +89,7 @@
         .btn-wa {
             background: linear-gradient(135deg, #25d366, #1ebe5d);
             box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-            margin-top: 5px;
+            margin-top: 15px;
         }
         .btn-wa:hover {
             box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
@@ -157,46 +123,20 @@
             z-index: 20;
             filter: drop-shadow(0 3px 3px rgba(0,0,0,0.3));
         }
-        .admin-box {
-            background: #fef9e7;
-            border: 1px solid #f9e79f;
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 15px;
-        }
-        .form-group {
-            margin-bottom: 10px;
-        }
-        .form-group label {
-            display: block;
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 5px;
-            color: #7d6608;
-        }
-        .form-group input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #f39c12;
-            border-radius: 8px;
-            font-size: 14px;
-            background: #fff;
-        }
         #result-message {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: bold;
             color: #7d6608;
             margin-top: 15px;
             text-align: center;
         }
-
         #claim-section {
             display: none;
             margin-top: 15px;
             text-align: center;
         }
 
-        /* Animasi Meriah & Hujan Uang */
+        /* Animasi Hujan Uang */
         .celebration-overlay {
             position: fixed;
             top: 0;
@@ -218,14 +158,8 @@
             animation: fall linear infinite;
         }
         @keyframes fall {
-            0% {
-                transform: translateY(-50px) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(105vh) rotate(360deg);
-                opacity: 0.2;
-            }
+            0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(105vh) rotate(360deg); opacity: 0.2; }
         }
         .popup-win {
             animation: bounceIn 0.8s ease;
@@ -244,102 +178,44 @@
     <div id="celebration" class="celebration-overlay"></div>
 
     <div class="container">
-        <h1>SELAMAT DATANG DI EVENT LUCKY DRAW BEA & CUKAI</h1>
+        <h1>✨ SPIN LUCKY DRAW EKSKLUSIF ✨</h1>
         
-        <!-- BAGIAN 1: INFO TIKET & PEMBELIAN -->
-        <div class="section-box">
-            <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=600&q=80" alt="Kupon Lucky Draw">
-            <p style="font-weight: bold; color: #7d6608;">💵 Tiket Kupon Resmi Event 💵</p>
-            <div class="price"></div>
-        </div>
-        <button class="btn btn-wa" onclick="buyTicketToWhatsApp()">💳 Dapatkan kupon sekarang (KLIK DISINI)</button>
-
-        <br><hr style="border: 0; border-top: 2px dashed #f39c12; margin: 25px 0;"><br>
-
-        <!-- BAGIAN 2: SPIN LUCKY DRAW DENGAN KODE ADMIN -->
         <div class="card-block">
-            <h2>✨ Spin Lucky Draw ✨</h2>
-            
-            <div class="admin-box">
-                <div class="form-group">
-                    <label>🔑 Masukkan Kode Unik dari Admin:</label>
-                    <div style="display: flex; gap: 8px; margin-top: 5px;">
-                        <input type="text" id="admin-code" placeholder="">
-                        <button class="btn" style="width: 100px; padding: 8px;" onclick="verifyCode()">Aktivasi</button>
-                    </div>
-                </div>
-                <button class="btn btn-wa" style="font-size: 14px; padding: 10px;" onclick="requestAdminCode()">💬 Minta Kode ke WhatsApp Admin</button>
-            </div>
-
             <div class="wheel-container">
                 <div class="pointer"></div>
                 <canvas id="wheel" width="400" height="400"></canvas>
             </div>
             
-            <button class="btn" id="spin-btn" onclick="startSpin()" disabled>🎯 Putar Roda Sekarang!</button>
+            <button class="btn" id="spin-btn" onclick="startSpin()">🎯 Putar Roda Sekarang!</button>
             <div id="result-message"></div>
             
-            <!-- Tombol Klaim Hadiah ke WA -->
+            <!-- Tombol Lanjut ke Admin -->
             <div id="claim-section">
-                <button class="btn btn-wa" onclick="claimPrizeToWhatsApp()">🎁 Kirim Klaim Hadiah ke WA Admin</button>
+                <a href="#" class="btn btn-wa" id="wa-link" onclick="goToWhatsApp()">💬 Lanjut ke Admin</a>
             </div>
         </div>
     </div>
 
     <script>
         let wonPrize = "";
+        const whatsappNumber = "62882001165502"; // Ubah nomor WhatsApp tujuan Anda di sini
 
-        function buyTicketToWhatsApp() {
-            const message = "Halo Admin, saya ingin mendapatkan nomor kupon undian nya.";
+        function goToWhatsApp() {
+            const message = `Halo Admin, saya telah menyelesaikan spin Lucky Draw dan berhasil memenangkan hadiah *${wonPrize.toUpperCase()}*. Mohon bantuannya. Terima kasih! 🎉`;
             const encodedMessage = encodeURIComponent(message);
-            const whatsappNumber = "62882001165502"; // Ganti nomor WhatsApp tujuan Anda
             window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
-        }
-
-        function requestAdminCode() {
-            const message = "Halo Admin, saya ingin meminta kode unik untuk memutar Roda Lucky Draw.";
-            const encodedMessage = encodeURIComponent(message);
-            const whatsappNumber = "62882001165502"; // Ganti nomor WhatsApp tujuan Anda
-            window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
-        }
-
-        function claimPrizeToWhatsApp() {
-            const message = `Halo Admin, saya telah menyelesaikan spin Lucky Draw dan berhasil memenangkan hadiah *${wonPrize.toUpperCase()}*. Mohon panduan untuk proses penukaran/klaim hadiahnya. Terima kasih! 🎉`;
-            const encodedMessage = encodeURIComponent(message);
-            const whatsappNumber = "62882001165502"; // Ganti nomor WhatsApp tujuan Anda
-            window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
-        }
-
-        let targetIndex = 0;
-
-        function verifyCode() {
-            const codeInput = document.getElementById('admin-code').value.trim().toUpperCase();
-
-            if(codeInput === "ADMIN01") {
-                targetIndex = 4; // Emas Antam 50Gram
-                alert("Kode anda sudah aktif , Putar Roda nya SEKARANG!.");
-                document.getElementById('spin-btn').disabled = false;
-                document.getElementById('admin-code').disabled = true;
-            } else if(codeInput === "ADMIN98") {
-                targetIndex = 3; // Uang Tunai Rp 50.000.000
-                alert("Kod Berhasil! silahkan tekan tombol putar sekarang.");
-                document.getElementById('spin-btn').disabled = false;
-                document.getElementById('admin-code').disabled = true;
-            } else {
-                alert("Kode tidak valid!, Silahkan chat admin terlebih dahulu.");
-            }
         }
 
         const canvas = document.getElementById("wheel");
         const ctx = canvas.getContext("2d");
 
-        // Daftar Hadiah dengan latar belakang warna biru dan teks hitam-putih
+        // Daftar Hadiah pada Roda
         const sectors = [
             { line1: "MOTOR", line2: "ADV150", bgColor: "#2980b9" },
             { line1: "EMAS ANTAM", line2: "27 GRAM", bgColor: "#3498db" },
             { line1: "MOBIL FORTUNER", line2: "TAHUN 2026", bgColor: "#1f618d" },
-            { line1: "UANG TUNAI", line2: "RP 50.000.000", bgColor: "#2471a3" }, // Index 3 (ADMIN98)
-            { line1: "EMAS ANTAM", line2: "50 GRAM", bgColor: "#2e86c1" }  // Index 4 (ADMIN01)
+            { line1: "UANG TUNAI", line2: "RP 50.000.000", bgColor: "#2471a3" },
+            { line1: "EMAS ANTAM", line2: "50 GRAM", bgColor: "#2e86c1" }
         ];
 
         const arc = (2 * Math.PI) / sectors.length;
@@ -353,7 +229,6 @@
             const angle = startAngle + i * arc;
             ctx.save();
             
-            // Menggambar latar belakang sektor dengan warna biru
             ctx.beginPath();
             ctx.moveTo(200, 200);
             ctx.arc(200, 200, 200, angle, angle + arc, false);
@@ -362,7 +237,6 @@
             ctx.fillStyle = sector.bgColor;
             ctx.fill();
 
-            // Garis pembatas antar sektor berwarna putih
             ctx.beginPath();
             ctx.moveTo(200, 200);
             ctx.arc(200, 200, 200, angle, angle + arc, false);
@@ -372,7 +246,6 @@
             ctx.stroke();
             ctx.restore();
 
-            // Mengatur teks 2 baris dengan perpaduan warna hitam dan putih
             ctx.save();
             ctx.translate(200, 200);
             const midAngle = angle + arc / 2;
@@ -413,6 +286,8 @@
             document.getElementById('spin-btn').disabled = true;
             document.getElementById('result-message').innerText = "Memutar...";
             
+            // Dikunci agar selalu jatuh ke Emas Antam 50 Gram (Index ke-4)
+            let targetIndex = 4; 
             wonPrize = sectors[targetIndex].line1 + " " + sectors[targetIndex].line2;
 
             let spins = 4; 
@@ -438,7 +313,7 @@
                 if (percent < 1) {
                     requestAnimationFrame(animateSpin);
                 } else {
-                    document.getElementById('result-message').innerHTML = `<div class="popup-win">🎉 SELAMAT! ANDA BERHASIL MENDAPATKAN: <br><span style="color: #c0392b; font-size: 20px;">${wonPrize.toUpperCase()} UTAMA!</span> 🥳</div>`;
+                    document.getElementById('result-message').innerHTML = `<div class="popup-win">🎉 SELAMAT! ANDA BERHASIL MENDAPATKAN: <br><span style="color: #c0392b; font-size: 18px;">${wonPrize.toUpperCase()}</span> 🥳</div>`;
                     document.getElementById('claim-section').style.display = 'block';
                     triggerCelebration();
                 }
